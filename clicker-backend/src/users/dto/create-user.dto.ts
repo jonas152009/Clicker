@@ -1,6 +1,12 @@
-export class CreateUserDto {
+import { IsDefined, IsEmail, IsNotEmpty, IsNotIn, IsNumber, IsString } from "class-validator";
 
+export class CreateUserDto {
+   @IsNotEmpty()
+   @IsString()
    name: string;
-   age: number;
+
+   @IsNotEmpty()
+   @IsNumber()
+   age: number
   
 }

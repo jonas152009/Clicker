@@ -18,7 +18,7 @@ export class UsersService {
     return this.users;
   }
 
-  findOne(id: number) {
+  findOne(id: number, ) {
     return this.users[id];
   }
 
