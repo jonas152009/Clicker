@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+import { User, UserDocument } from './entities/user.entity';
 
 
 @Injectable()
@@ -13,7 +13,10 @@ export class UsersService {
     this.users.push(user);
     return createUserDto;
   }
-  
+  getusers_Document(userDocument: UserDocument)
+  {
+    return JSON.stringify(userDocument);
+  }
   findAll() {
     return this.users;
   }
