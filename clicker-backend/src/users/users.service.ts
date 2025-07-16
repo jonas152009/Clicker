@@ -2,15 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
+import { InjectConnection, InjectModel } from '@nestjs/mongoose';
+import { connection, Connection, Model } from 'mongoose';
+
 
 
 @Injectable()
 export class UsersService {
   users: User[] = [];
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
     const user: User ={name: createUserDto.name, age: createUserDto.age};
     this.users.push(user);
+    const createdUser = new this.userModel(createUserDto);
+   await createdUser.save();
     return createUserDto;
   }
   getusers_Document(userDocument: UserDocument)
@@ -38,4 +43,9 @@ export class UsersService {
   remove(id: number) {
     this.users.splice(id);
   }
-}
+  constructor(@InjectModel(User.name) private userModel: Model<User> ) {}
+
+ 
+    
+  }
+

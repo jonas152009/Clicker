@@ -5,19 +5,20 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
+import { config } from 'process';
 
 
-
-
-
-mongoose.connect('mongodb://127.0.0.1:27017/app');
 @Module({
-  imports: [ConfigModule.forRoot(),//MongooseModule.forRoot(process.env.URI!),//
-    
-  ],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async  (configService: ConfigService) => ({ uri: configService.get<string>('URI'),
+    }),
+    inject: [ConfigService],
+  }),
+  UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  
-}
+export class AppModule {}
