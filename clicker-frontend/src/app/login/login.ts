@@ -22,7 +22,9 @@ export class Login {
     for (const user of users) {
       if (user.name == this.username) {
         this.router.navigate(['game']);
+       
       }
     }
+     console.log(users);
   }
 }

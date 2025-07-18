@@ -13,7 +13,8 @@ export class LoginAPI {
    return firstValueFrom(this.http.get<User[]>('http://localhost:3000/users'));
   }
   async createUser(user: User){
-    age: Number;
-    this.http.post<User>('http://localhost:3000/users', user)
+  
+    return firstValueFrom(this.http.post<User>('http://localhost:3000/users', user));
+    
   }
 }

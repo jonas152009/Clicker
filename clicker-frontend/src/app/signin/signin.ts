@@ -19,18 +19,12 @@ export class Signin {
 
 
   constructor(private readonly login: LoginAPI) {}
-
-  userNameControl = new FormControl('ffff');
+  
+  userNameControl = new FormControl<string>("");
   private router = inject(Router);
-  userNameInput()
-  {
-    
-  }
+ 
   async doSaveEvent() {
-   
-
-   
-    
+    const res = await this.login.createUser({name: this.userNameControl.value ?? " ", age:1});
   }
 }
 
