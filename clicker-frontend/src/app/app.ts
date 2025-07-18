@@ -2,25 +2,19 @@ import { BuiltinType } from '@angular/compiler';
 import { Component, inject, signal } from '@angular/core';
 import { bootstrapAppScopedEarlyEventContract } from '@angular/core/primitives/event-dispatch';
 import { Router, RouterOutlet, Routes } from '@angular/router';
-import {RouterModule} from '@angular/router';
-import { Game } from '../Game/game';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterModule],
   templateUrl: './app.html',
-
-  
 })
 export class App {
   private router = inject(Router);
-  constructor()
-  {
+  constructor() {
     this.navigateToGame();
   }
-  navigateToGame()
-  {
-    this.router.navigate(['signin']);
+  navigateToGame() {
+    this.router.navigate(['login']);
   }
- 
 }

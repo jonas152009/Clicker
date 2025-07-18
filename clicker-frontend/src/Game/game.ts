@@ -3,7 +3,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterModule],
+  imports: [RouterModule],
   templateUrl: './game.html',
 })
 export class Game {

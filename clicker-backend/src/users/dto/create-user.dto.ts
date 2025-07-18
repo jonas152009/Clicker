@@ -3,6 +3,7 @@ import { IsDefined, IsEmail, IsNotEmpty, IsNotIn, IsNumber, IsString } from "cla
 export class CreateUserDto {
    @IsNotEmpty()
    @IsString()
+
    name: string;
 
    @IsNotEmpty()

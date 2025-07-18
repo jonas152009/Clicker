@@ -1,7 +1,9 @@
 import {Routes} from '@angular/router';
 import { App } from './app';
+
+import { Signin } from './signin/signin';
 import { Game } from '../Game/game';
-import { Signin } from '../signin/signin';
+import { Login } from './login/login';
 
 
 const routeConfig: Routes = [
@@ -19,6 +21,11 @@ const routeConfig: Routes = [
     path: 'signin',
     component: Signin,
     title: 'Sign up page',
+  },
+       {
+    path: 'login',
+    component: Login,
+    title: 'Login page',
   },
      {
     path: '**',

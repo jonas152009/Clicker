@@ -6,7 +6,7 @@ import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { connection, Connection, Model } from 'mongoose';
 import { throwError } from 'rxjs';
 
-@Injectable()
+
 export class UsersService {
   
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}

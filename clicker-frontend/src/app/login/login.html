@@ -1,0 +1,9 @@
+
+<body class="h-screen w-screen relative">
+  <div class="flex items-center flex-col justify-center h-full w-full">
+    <h1>Login</h1>
+     <input class="bg-blue-400  hover:cursor-horizontal-text"type="text" [formControl]="userNameControl">
+     <button class="w-2xs h-10 bg-amber-800" (click)="doSaveEvent()">save</button>
+     <p>{{username}} </p>
+  </div>
+</body>
