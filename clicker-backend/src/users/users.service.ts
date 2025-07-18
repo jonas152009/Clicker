@@ -8,13 +8,12 @@ import { throwError } from 'rxjs';
 
 @Injectable()
 export class UsersService {
-  users: User[] = [];
+  
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto) {
     try {
-      const user: User = { name: createUserDto.name, age: createUserDto.age };
-      this.users.push(user);
+      
       const createdUser = new this.userModel(createUserDto);
       await createdUser.save();
       return createUserDto;

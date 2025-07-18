@@ -1,0 +1,15 @@
+<body class="h-screen w-screen relative">
+  <div class="flex items-center flex-col h-full w-full justify-around">
+    <p class="">
+      <b>{{ counter }}</b>
+    </p>
+    <div></div>
+    <button
+      class="w-2xs h-72 bg-amber-900 roun rounded-full border-10 active:border-red-500 absolute"
+      (click)="doClickEvent()"
+    >
+      cookie
+    </button>
+  </div>
+  <a [routerLink]="['/game']">Link</a>
+</body>
