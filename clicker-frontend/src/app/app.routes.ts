@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
 import { App } from './app';
 
-import { Signin } from './signin/signin';
-import { Game } from '../Game/game';
+import {Signup } from './signup/signup';
+import { Game } from './Game/game';
 import { Login } from './login/login';
 
 
@@ -18,8 +18,8 @@ const routeConfig: Routes = [
     title:'Game page'
   },
     {
-    path: 'signin',
-    component: Signin,
+    path: 'signup',
+    component: Signup,
     title: 'Sign up page',
   },
        {

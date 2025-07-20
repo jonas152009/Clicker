@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login, login-reactive-favorite-color',
-imports: [RouterModule, ReactiveFormsModule],
+  imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './login.html',
 })
 export class Login {
@@ -13,7 +13,7 @@ export class Login {
 
   constructor(private readonly login: LoginAPI) {}
 
-  userNameControl = new FormControl('ffff');
+  userNameControl = new FormControl('');
   private router = inject(Router);
   async doSaveEvent() {
     this.username = this.userNameControl.value ?? '';
@@ -22,9 +22,8 @@ export class Login {
     for (const user of users) {
       if (user.name == this.username) {
         this.router.navigate(['game']);
-       
       }
     }
-     console.log(users);
+    console.log(users);
   }
 }
