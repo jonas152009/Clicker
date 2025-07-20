@@ -10,21 +10,21 @@
     @if(userNameControl.hasError('minlength')){
 
     <p>Too short minumum 3 characters</p>
-    }
-     @if(userNameControl.hasError('maxlength')){
+    } @if(userNameControl.hasError('maxlength')){
 
     <p>Too long maximum 10 characters</p>
-    }
-    @if(userNameControl.hasError('NoSpace')){
-      <p>Names with space not allowed</p>
+    } @if(userNameControl.hasError('NoSpace')){
+    <p>Names with space not allowed</p>
     }
 
     <button
       class="w-2xs h-10 bg-amber-800 disabled:bg-gray-400"
       (click)="doSaveEvent()"
       [disabled]="userNameControl.invalid"
+      type="submit"
     >
-      save
+      Save
     </button>
+    <a [routerLink]="['/login']">Login</a>
   </div>
 </body>

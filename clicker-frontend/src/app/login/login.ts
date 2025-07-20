@@ -14,13 +14,10 @@ export class Login {
   isunknownUser = false;
   constructor(private readonly login: LoginAPI) {}
 
-    userNameControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
+    userNameControl = new FormControl('');
 
   private router = inject(Router);
-  async doSaveEvent() {
+  async doConfirmEvent() {
 
     this.username = this.userNameControl.value ?? '';
     const users = await this.login.getUsers();

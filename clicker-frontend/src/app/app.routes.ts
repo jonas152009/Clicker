@@ -4,14 +4,10 @@ import { App } from './app';
 import {Signup } from './signup/signup';
 import { Game } from './Game/game';
 import { Login } from './login/login';
+import { Admin } from './admin/admin';
 
 
 const routeConfig: Routes = [
-  {
-    path: '',
-    component: App,
-    title: 'Home page',
-  },
   {
     path:'game',
     component:Game,
@@ -22,10 +18,14 @@ const routeConfig: Routes = [
     component: Signup,
     title: 'Sign up page',
   },
-       {
+    {
     path: 'login',
     component: Login,
     title: 'Login page',
+  },{
+    path: 'admin',
+    component: Admin,
+    title: 'Admin page',
   },
      {
     path: '**',

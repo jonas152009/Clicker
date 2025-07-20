@@ -29,9 +29,9 @@ export class LoginAPI {
       return {name:"",age:0}
     }
   }
-    async deleteuser(user: User){
+    async deleteUser(id: string){
       try{
-    return firstValueFrom(this.http.post<User>('http://localhost:3000/users', user));
+    return firstValueFrom(this.http.delete<User>('http://localhost:3000/users/'+id));
     }
     catch(error){
       console.error("No backend Conection");
