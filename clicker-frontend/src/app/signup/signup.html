@@ -2,7 +2,7 @@
   <div class="flex items-center flex-col justify-center h-full w-full">
     <h1>Sign up</h1>
     <input
-      class="bg-blue-400 hover:cursor-horizontal-text"
+      class="border-2 border-black hover:cursor-horizontal-text"
       type="text"
       [formControl]="userNameControl"
     />
@@ -16,15 +16,15 @@
     } @if(userNameControl.hasError('NoSpace')){
     <p>Names with space not allowed</p>
     }
-
+<div class="h-1"></div>
     <button
-      class="w-2xs h-10 bg-amber-800 disabled:bg-gray-400"
+      class="w-2xs h-10 bg-green-600 text-white disabled:bg-gray-400 rounded-4xl border-2 border-black"
       (click)="doSaveEvent()"
       [disabled]="userNameControl.invalid"
       type="submit"
     >
       Save
     </button>
-    <a [routerLink]="['/login']">Login</a>
+    <a [routerLink]="['/login'] " class="text-blue-600">Link to Login</a>
   </div>
 </body>
