@@ -22,25 +22,28 @@ import { Validators } from '@angular/forms';
   templateUrl: './signup.html',
 })
 export class Signup {
+  
   constructor(private readonly login: LoginAPI) {}
 
   userNameControl = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    this.VallidationNoWhitespace,
+    Validators.maxLength(10),
+    VallidationNoSpace,
   ]);
   private router = inject(Router);
 
   async doSaveEvent() {
-    const res = await this.login.createUser({
+    const new_user = await this.login.createUser({
       name: this.userNameControl.value ?? ' ',
       age: 1,
     });
   }
-  VallidationNoWhitespace(
+ 
+}
+ export function VallidationNoSpace(
     nameControl: AbstractControl<any, any, any>
   ): ValidationErrors | null {
-    const isWhitespace = (nameControl.value || ' ').trim().length === 0;
-    return isWhitespace ? { whitespace: true } : null;
+    const isSpace = /\s/.test(nameControl.value)
+    return isSpace ? { NoSpace: true } : null;
   }
-}

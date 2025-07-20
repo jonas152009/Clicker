@@ -9,7 +9,14 @@
 
     @if(userNameControl.hasError('minlength')){
 
-    <p>name is to short</p>
+    <p>Too short minumum 3 characters</p>
+    }
+     @if(userNameControl.hasError('maxlength')){
+
+    <p>Too long maximum 10 characters</p>
+    }
+    @if(userNameControl.hasError('NoSpace')){
+      <p>Names with space not allowed</p>
     }
 
     <button

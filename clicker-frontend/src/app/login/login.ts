@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { LoginAPI } from './login-api';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { VallidationNoSpace } from '../signup/signup';
 
 @Component({
   selector: 'app-login, login-reactive-favorite-color',
@@ -10,20 +11,32 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class Login {
   username = ' ';
-
+  isunknownUser = false;
   constructor(private readonly login: LoginAPI) {}
 
-  userNameControl = new FormControl('');
+    userNameControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+
   private router = inject(Router);
   async doSaveEvent() {
-    this.username = this.userNameControl.value ?? '';
 
+    this.username = this.userNameControl.value ?? '';
     const users = await this.login.getUsers();
+    try{
     for (const user of users) {
       if (user.name == this.username) {
         this.router.navigate(['game']);
       }
     }
-    console.log(users);
+     this.isunknownUser = true;
+  }catch(error){
+   
+    console.error(error)
   }
+  } 
+
+
+  
 }
