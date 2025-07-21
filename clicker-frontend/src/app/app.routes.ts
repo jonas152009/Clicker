@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import { App } from './app';
 
 import {Signup } from './signin/signup';
-import { Game } from './signin/Game/game';
+import { Game } from './Game/game';
 import { Login } from './login/login';
 import { Admin } from './admin/admin';
 
@@ -29,8 +29,7 @@ const routeConfig: Routes = [
   },
      {
     path: '**',
-    component: App,
-    title: 'Home page',
+    redirectTo: '/login'
   },
     
 ];

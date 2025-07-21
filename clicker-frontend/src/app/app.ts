@@ -9,12 +9,4 @@ import { RouterModule } from '@angular/router';
   imports: [RouterOutlet, RouterModule],
   templateUrl: './app.html',
 })
-export class App {
-  private router = inject(Router);
-  constructor() {
-    this.navigateToGame();
-  }
-  navigateToGame() {
-    this.router.navigate(['login']);
-  }
-}
+export class App {}
