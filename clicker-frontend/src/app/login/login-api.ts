@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../signup/user.interface';
+import { User } from '../signin/user.interface';
 import { firstValueFrom } from 'rxjs';
 
 

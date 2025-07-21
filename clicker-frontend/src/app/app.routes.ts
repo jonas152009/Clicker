@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
 import { App } from './app';
 
-import {Signup } from './signup/signup';
-import { Game } from './Game/game';
+import {Signup } from './signin/signup';
+import { Game } from './signin/Game/game';
 import { Login } from './login/login';
 import { Admin } from './admin/admin';
 

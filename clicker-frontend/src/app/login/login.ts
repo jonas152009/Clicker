@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { LoginAPI } from './login-api';
 import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { VallidationNoSpace } from '../signup/signup';
+import { VallidationNoSpace } from '../signin/signup';
 
 @Component({
   selector: 'app-login, login-reactive-favorite-color',

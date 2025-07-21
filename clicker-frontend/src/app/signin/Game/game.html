@@ -1,0 +1,37 @@
+<body class="h-screen w-screen bg-gray-900">
+  <div class="grid grid-cols-7 h-screen gap-4 p-6">
+    
+    <!-- Main Area -->
+    <div class="col-span-3 flex flex-col items-center justify-center ">
+      
+      <!-- Counter -->
+      <p class="text-4xl font-bold text-amber-400 mb-5">
+       {{ count }}
+      </p>
+
+      <!-- Cookie Button -->
+      <button
+        class="w-100 h-100 bg-amber-900 rounded-full border-8 border-amber-800 active:scale-105 "
+        (click)="doClickAddCookies()"
+      >
+        
+      </button>
+      <a [routerLink]="['/admin'] " class="text-blue-600">Link to Admin</a>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-span-4 bg-gray-500 rounded-3xl p-4 shadow-md">
+      <div class="flex items-center flex-col h-full w-full">
+        <button class="mb-5 w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="doBiggerMultiplier()"  [disabled]="isEnoughCookiesforMultiplier">Multiplier upgrade
+          <p>Multiplication factor:{{multiplier}}</p>
+          <p>Next Multiplier Price: {{multiplierPrice}}</p>
+        </button>
+        <button class="w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="doMoreCookiespc()" [disabled]="isEnoughCookiesforCookiespc" >Cookies per second upgrade 
+          <p>Cookies per second:{{cookiespc}}</p>
+          <p>More Cokkies per second Price:{{cookiespcPrice}} </p>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+
