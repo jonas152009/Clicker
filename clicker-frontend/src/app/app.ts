@@ -1,8 +1,5 @@
-import { BuiltinType } from '@angular/compiler';
-import { Component, inject, signal } from '@angular/core';
-import { bootstrapAppScopedEarlyEventContract } from '@angular/core/primitives/event-dispatch';
-import { Router, RouterOutlet, Routes } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
