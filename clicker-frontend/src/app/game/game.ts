@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './game.html',
 })
-export class Game {
+export class Game implements OnInit {
   count = 0;
   isEnoughCookiesforMultiplier = true;
   isEnoughCookiesforCookiespc = true;
@@ -21,9 +21,10 @@ export class Game {
       this.cookieProduction();
     }, 1000);
     setInterval(() => {
-      this.ControlenoughCookies();
+      this.controlenoughCookies();
     }, 100);
   }
+
   cookieProduction() {
     this.count = Math.round(this.count + this.cookiespc * this.multiplier);
   }
@@ -42,9 +43,30 @@ export class Game {
     this.cookiespc = this.cookiespc * 2;
     this.cookiespcPrice = this.cookiespcPrice * 2;
   }
-  ControlenoughCookies() {
+  controlenoughCookies() {
     this.isEnoughCookiesforMultiplier = (this.count < this.multiplierPrice);
 
     this.isEnoughCookiesforCookiespc = (this.count < this.cookiespcPrice);
-  }
+
+
+  
+    interface Building {
+      name: string;
+      cost: number
+    }
+
+    interface CookieBooster extends Building {
+      cookieAddition: () => number
+    }
+    const cb: CookieBooster = {
+      name: 'CookieBooster',
+      cost: 0,
+      cookieAddition: () => 7
+    } 
+
+    const t: Building[] = [{
+      name: 'kaloo',
+      cost: 0,
+    }, cb]
+      }
 }

@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import { App } from './app';
 
 import {Signup } from './signin/signup';
-import { Game } from './Game/game';
+import { Game } from './game/game';
 import { Login } from './login/login';
 import { Admin } from './admin/admin';
 
