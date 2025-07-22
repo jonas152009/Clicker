@@ -1,41 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../signin/user.interface';
 import { firstValueFrom } from 'rxjs';
-
+import { User } from '../signup/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginAPI {
   constructor(private readonly http: HttpClient) {}
-  
+
   async getUsers() {
-    try{
-   return firstValueFrom(this.http.get<User[]>('http://localhost:3000/users'));
-    }
-    catch(error){
-      console.error("No backend Conection");
-      return[{name:"",age:0}]
-    }
-    }
-  
-  async createUser(user: User){
-      try{
-    return firstValueFrom(this.http.post<User>('http://localhost:3000/users', user));
-    }
-    catch(error){
-      console.error("No backend Conection");
-      return {name:"",age:0}
+    try {
+      return firstValueFrom(
+        this.http.get<User[]>('http://localhost:3000/users')
+      );
+    } catch (error) {
+      console.error('No backend Conection');
+      return [{ name: '', age: 0 }];
     }
   }
-    async deleteUser(id: string){
-      try{
-    return firstValueFrom(this.http.delete<User>('http://localhost:3000/users/'+id));
+
+  async createUser(user: User) {
+    try {
+      return firstValueFrom(
+        this.http.post<User>('http://localhost:3000/users', user)
+      );
+    } catch (error) {
+      console.error('No backend Conection');
+      return { name: '', age: 0 };
     }
-    catch(error){
-      console.error("No backend Conection");
-      return {name:"",age:0}
+  }
+  async deleteUser(id: string) {
+    try {
+      return firstValueFrom(
+        this.http.delete<User>('http://localhost:3000/users/' + id)
+      );
+    } catch (error) {
+      console.error('No backend Conection');
+      return { name: '', age: 0 };
     }
-    }
+  }
 }

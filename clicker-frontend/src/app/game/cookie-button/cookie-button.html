@@ -1,0 +1,15 @@
+
+
+    <div class="flex flex-col items-center justify-center">
+      <p class="text-4xl font-bold text-amber-400 mb-5">
+        {{ count()?.() }}
+      </p>
+       <button
+         class="w-100 h-100 bg-amber-900 rounded-full border-8 border-amber-800 active:scale-105"
+        (click)="doClickAddCookies()"
+      ></button>
+      <a [routerLink]="['/admin']" class="text-blue-600">Link to Admin</a>
+    </div>
+    
+  
+

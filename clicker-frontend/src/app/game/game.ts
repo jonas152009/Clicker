@@ -1,72 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, computed, signal } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CookieButton } from './cookie-button/cookie-button';
+import { Upgradebar } from './upgradebar/upgradebar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, ReactiveFormsModule],
+  imports: [RouterModule, ReactiveFormsModule, CookieButton, Upgradebar],
   templateUrl: './game.html',
 })
-export class Game implements OnInit {
-  count = 0;
-  isEnoughCookiesforMultiplier = true;
-  isEnoughCookiesforCookiespc = true;
-  cookiespc = 1;
-  multiplier = 1;
-  multiplierPrice = 100;
-  cookiespcPrice = 50;
-
+export class Game {
+  count = signal(0);
+  cookieBooster = Upgradebar.cookieBooster;
   ngOnInit() {
     setInterval(() => {
-      this.cookieProduction();
+      CookieButton.cookieProduction(this.count, this.cookieBooster);
     }, 1000);
-    setInterval(() => {
-      this.controlenoughCookies();
-    }, 100);
   }
 
-  cookieProduction() {
-    this.count = Math.round(this.count + this.cookiespc * this.multiplier);
-  }
-
-  doClickAddCookies() {
-    this.count = Math.round(this.count + this.cookiespc * this.multiplier);
-  }
-
-  doBiggerMultiplier() {
-    this.count = this.count - this.multiplierPrice;
-    this.multiplier = Math.round(this.multiplier * 1.5);
-    this.multiplierPrice = this.multiplierPrice * 2;
-  }
-  doMoreCookiespc() {
-    this.count = this.count - this.cookiespcPrice;
-    this.cookiespc = this.cookiespc * 2;
-    this.cookiespcPrice = this.cookiespcPrice * 2;
-  }
-  controlenoughCookies() {
-    this.isEnoughCookiesforMultiplier = (this.count < this.multiplierPrice);
-
-    this.isEnoughCookiesforCookiespc = (this.count < this.cookiespcPrice);
-
-
-  
-    interface Building {
-      name: string;
-      cost: number
-    }
-
-    interface CookieBooster extends Building {
-      cookieAddition: () => number
-    }
-    const cb: CookieBooster = {
-      name: 'CookieBooster',
-      cost: 0,
-      cookieAddition: () => 7
-    } 
-
-    const t: Building[] = [{
-      name: 'kaloo',
-      cost: 0,
-    }, cb]
-      }
+  isenoughCookiesPerSecond = computed(
+    () => this.count() < this.cookieBooster[1].cost
+  );
+  isenoughCookiesMultiplier = computed(
+    () => this.count() < this.cookieBooster[0].cost
+  );
 }
