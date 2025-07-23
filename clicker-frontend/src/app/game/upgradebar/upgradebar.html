@@ -6,15 +6,18 @@
         
         <button class="mb-5 w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="cookieAddition(cookieBooster()![0], count()! )"  [disabled]="isenoughCookiesMultiplier()">Multiplier upgrade
        <p>Level:{{cookieBooster()![0].level}}</p>
-          <p>Cookies per second:{{cookieBooster()![0].multiplier}}</p>
+          <p>Cookies per second and more Cookies per Click:{{cookieBooster()![0].multiplier}}</p>
           <p>More Cokkies per second Price:{{cookieBooster()![0].cost}}</p>
         </button>
         <button class="w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="cookieAddition(cookieBooster()![1], count()!)" [disabled]="isenoughCookiesPerSecond()" >Cookies per second upgrade 
           <p>Level:{{cookieBooster()![1].level}}</p>
-          <p>Cookies per second:{{cookieBooster()![1].multiplier}}</p>
+          <p>Cookies per second and more Cookies per Click:{{cookieBooster()![1].multiplier}}</p>
           <p>More Cokkies per second Price:{{cookieBooster()![1].cost}} </p>
         </button>
-        <p>{{count()?.()}}</p>
+        <div>
+          <p class="text-yellow-300">You produce with one Click {{cookieBooster()![0].multiplier + cookieBooster()![1].multiplier +1}} Cookies</p>
+          <p class="text-yellow-300">You produce in one Second  {{cookieBooster()![0].multiplier + cookieBooster()![1].multiplier}} Cookies</p>
+        </div>
       
       </div>
     

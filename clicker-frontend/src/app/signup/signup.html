@@ -6,6 +6,7 @@
       type="text"
       [formControl]="userNameControl"
       (keydown.enter)="doSaveEvent()"
+      autofocus
     />
 
     @if(userNameControl.hasError('minlength')){

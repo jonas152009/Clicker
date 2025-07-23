@@ -22,36 +22,44 @@ export class Game {
     {
       name: 'cookieBoosterMultiplier',
       level: 0,
-      multiplier: 0.5,
+      multiplier: 0,
       cost: 100,
       increasinValue: 3,
-      increasinMultiplier: 1,
+      increasinMultiplier: 2,
     },
     {
       name: 'cookieBoosterCookiePerSecond',
       level: 0,
-      multiplier: 0.5,
+      multiplier: 0,
       cost: 50,
       increasinValue: 2,
-      increasinMultiplier: 0.5,
+      increasinMultiplier: 1,
     },
   ];
+  user: User = {
+  _id: "",
+  name: "",
+  count: 0,
+  buildings: this.cookieBooster,
+  playedBefore: false
+  };
 
   async getUserbyId() {
     localStorage.clear();
     console.log(this.safe_ID);
     this.user = await this.loginAPI.getUser(this.safe_ID!);
+    if(this.user.playedBefore){
     this.cookieBooster = this.user.buildings;
     this.count.update((value) => (value = this.user.count));
     console.log(this.user);
+    }else{
+      this.user.buildings = this.cookieBooster;
+      this.user.count = this.count();
+      this.user.playedBefore = true;
+    }
   }
 
-  user: User = {
-    name: '',
-    count: 0,
-    buildings: this.cookieBooster,
-    _id: '',
-  };
+
   count = signal(this.user.count);
   async UpdateUser() {
     console.log(this.user);

@@ -12,5 +12,7 @@ export class User {
   buildings: Building[];
   @Prop()
   count: number;
+  @Prop()
+  playedBefore: boolean;
 }
 export const UserSchema = SchemaFactory.createForClass(User);

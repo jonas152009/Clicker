@@ -19,7 +19,7 @@ export class CookieButton {
     count.update(
       (value) =>
         value +
-        1 *
+        
           cookieBooster.reduce((a, b) => {
             return a + b.multiplier;
           }, 0)
@@ -30,11 +30,11 @@ export class CookieButton {
     this.count()?.update(
       (value) =>
         value +
-        1 *
+        
           Math.round(
             this.cookieBooster()!.reduce((a, b) => {
               return a + b.multiplier;
-            }, 0)
+            }, 1)
           )
     );
   }

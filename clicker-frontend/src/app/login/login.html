@@ -7,6 +7,7 @@
       type="text"
       [formControl]="userNameControl"
       (keydown.enter)="doConfirmEvent()"
+      autofocus
     />
     <div class="h-1"></div>
     @if(isunknownUser){

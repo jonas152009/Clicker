@@ -5,4 +5,5 @@ export interface User {
   name: string;
   count: number;
   buildings: Building[];
+  playedBefore: boolean;
 }

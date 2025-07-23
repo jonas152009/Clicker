@@ -52,8 +52,9 @@ export class Signup {
     }
 
     const new_user = await this.login.createUser({
-      name: this.userNameControl.value ?? ' '
+      name: this.userNameControl.value ?? ' ', playedBefore: false
     });
+    this.router.navigate(['login']);
   }
   
  
