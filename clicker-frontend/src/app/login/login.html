@@ -1,17 +1,14 @@
-<body class="h-screen w-screen relative ">
+<body class="h-screen w-screen relative">
   <div class="flex items-center flex-col justify-center h-full w-full">
     <h1>Login</h1>
 
-
-  <input
-      class=" bg-white border-black border-2 hover:cursor-horizontal-text"
+    <input
+      class="bg-white border-black border-2 hover:cursor-horizontal-text"
       type="text"
       [formControl]="userNameControl"
-       (keydown.enter)="doConfirmEvent()"
+      (keydown.enter)="doConfirmEvent()"
     />
-    <div class="h-1">
-
-    </div>
+    <div class="h-1"></div>
     @if(isunknownUser){
     <p>User not in Database</p>
     }
@@ -19,12 +16,9 @@
       class="w-2xs h-10 border-black border-2 rounded-4xl bg-blue-600 text-white disabled:bg-gray-400"
       (click)="doConfirmEvent()"
       [disabled]="userNameControl.invalid"
-      
     >
       Confirm
     </button>
-  
-  
 
     <a [routerLink]="['/signup']" class="text-blue-600">Link to Sign up</a>
   </div>

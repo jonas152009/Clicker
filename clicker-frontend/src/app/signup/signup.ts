@@ -14,6 +14,8 @@ import { LoginAPI } from '../login/login-api';
 import { User } from './user.interface';
 import { Observable } from 'rxjs';
 import { Validators } from '@angular/forms';
+import { Game } from '../game/game';
+import { Upgradebar } from '../game/upgradebar/upgradebar';
 
 @Component({
   selector: 'signup-root, signup-reactive-favorite-color',
@@ -22,7 +24,8 @@ import { Validators } from '@angular/forms';
   templateUrl: './signup.html',
 })
 export class Signup {
-  
+  username = '';
+  isunknownUser = false;
   constructor(private readonly login: LoginAPI) {}
 
   userNameControl = new FormControl('', [
@@ -34,9 +37,22 @@ export class Signup {
   private router = inject(Router);
 
   async doSaveEvent() {
+      this.username = this.userNameControl.value ?? '';
+    const users = await this.login.getUsers();
+    try {
+      for (const user of users) {
+        if (user.name == this.username) {
+           this.isunknownUser = false; 
+           return;
+        }
+      }
+      this.isunknownUser = true;
+    } catch (error) {
+      console.error(error);
+    }
+    const rndId = Math.floor(Math.random()* 9000) +1000
     const new_user = await this.login.createUser({
-      name: this.userNameControl.value ?? ' ',
-      age: 1,
+      name: this.userNameControl.value ?? ' ', count: 0, buildings: [], _id:rndId.toString()
     });
   }
   

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { User } from '../signup/user.interface';
+import { Upgradebar } from '../game/upgradebar/upgradebar';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class LoginAPI {
       );
     } catch (error) {
       console.error('No backend Conection');
-      return [{ name: '', age: 0 }];
+      return [{ name: '' , count: 0, buildings: [], _id:''}];
     }
   }
 
@@ -27,17 +28,42 @@ export class LoginAPI {
       );
     } catch (error) {
       console.error('No backend Conection');
-      return { name: '', age: 0 };
+      return { name: ''};
     }
   }
   async deleteUser(id: string) {
     try {
       return firstValueFrom(
-        this.http.delete<User>('http://localhost:3000/users/' + id)
+        this.http.delete<User>('http://localhost:3000/users' + id)
       );
     } catch (error) {
       console.error('No backend Conection');
-      return { name: '', age: 0 };
+      return { name: ''};
+    }
+  }
+    async UpdateUser(id: string, user: User) {
+    try {
+      console.log(id)
+      return firstValueFrom(
+        
+        this.http.patch<User>('http://localhost:3000/users/' + id, user)
+      );
+    } catch (error) {
+      console.error('No backend Conection');
+      return { name: ''};
+    }
+
+
+  }
+    async getUser(id: string) {
+    try {
+      console.log('http://localhost:3000/users/'+id)
+      return firstValueFrom(
+        this.http.get<User>('http://localhost:3000/users/'+id)
+      );
+    } catch (error) {
+      console.error('No backend Conection');
+      return { name: '' , count: 0, buildings: [], _id:''};
     }
   }
 }

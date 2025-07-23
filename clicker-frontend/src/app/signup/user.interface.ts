@@ -1,4 +1,8 @@
+import { Building } from '../Interfaces/building';
+
 export interface User {
+  _id: string;
   name: string;
-  age: number;
+  count: number;
+  buildings: Building[];
 }

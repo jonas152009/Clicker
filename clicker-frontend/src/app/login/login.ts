@@ -9,7 +9,8 @@ import { LoginAPI } from './login-api';
   templateUrl: './login.html',
 })
 export class Login {
-  username = ' ';
+  safe_ID = "";
+  username = '';
   isunknownUser = false;
   constructor(private readonly login: LoginAPI) {}
 
@@ -21,7 +22,12 @@ export class Login {
     const users = await this.login.getUsers();
     try {
       for (const user of users) {
-        if (user.name == this.username) {
+        if (user.name == this.username) 
+          {
+        
+          this.safe_ID = user._id;
+          console.log(this.safe_ID)
+          localStorage.setItem("0",this.safe_ID)
           this.router.navigate(['game']);
         }
       }
