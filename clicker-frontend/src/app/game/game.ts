@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Building } from '../Interfaces/building';
@@ -17,8 +17,6 @@ export class Game {
     this.getUserbyId();
   }
   safe_ID = localStorage.getItem('0');
-
-
 
   cookieBooster: Building[] = [
     {
@@ -44,12 +42,9 @@ export class Game {
     console.log(this.safe_ID);
     this.user = await this.loginAPI.getUser(this.safe_ID!);
     this.cookieBooster = this.user.buildings;
-    this.count.update((value) => value = this.user.count);
+    this.count.update((value) => (value = this.user.count));
     console.log(this.user);
   }
-
-
-
 
   user: User = {
     name: '',
@@ -57,11 +52,11 @@ export class Game {
     buildings: this.cookieBooster,
     _id: '',
   };
-    count = signal(this.user.count);
-    async UpdateUser() {
+  count = signal(this.user.count);
+  async UpdateUser() {
     console.log(this.user);
     this.user.count = this.count();
-    console.log(this.cookieBooster)
+    console.log(this.cookieBooster);
     this.user.buildings = this.cookieBooster;
     await this.loginAPI.UpdateUser(this.safe_ID!, this.user);
   }
@@ -73,11 +68,4 @@ export class Game {
       this.UpdateUser();
     }, 5000);
   }
-
-  isenoughCookiesPerSecond = computed(
-    () => this.count() < this.cookieBooster[1].cost
-  );
-  isenoughCookiesMultiplier = computed(
-    () => this.count() < this.cookieBooster[0].cost
-  );
 }

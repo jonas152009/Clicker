@@ -4,15 +4,15 @@
 
       <div class="flex items-center flex-col h-full w-full">
         
-        <button class="mb-5 w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="cookieAddition(cookiebooster()![0], count()! )"  [disabled]="isenoughCookiesMultiplier()">Multiplier upgrade
-       <p>Level:{{cookiebooster()![0].level}}</p>
-          <p>Cookies per second:{{cookiebooster()![0].multiplier}}</p>
-          <p>More Cokkies per second Price:{{cookiebooster()![0].cost}}</p>
+        <button class="mb-5 w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="cookieAddition(cookieBooster()![0], count()! )"  [disabled]="isenoughCookiesMultiplier()">Multiplier upgrade
+       <p>Level:{{cookieBooster()![0].level}}</p>
+          <p>Cookies per second:{{cookieBooster()![0].multiplier}}</p>
+          <p>More Cokkies per second Price:{{cookieBooster()![0].cost}}</p>
         </button>
-        <button class="w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="cookieAddition(cookiebooster()![1], count()!)" [disabled]="isenoughCookiesPerSecond()" >Cookies per second upgrade 
-          <p>Level:{{cookiebooster()![1].level}}</p>
-          <p>Cookies per second:{{cookiebooster()![1].multiplier}}</p>
-          <p>More Cokkies per second Price:{{cookiebooster()![1].cost}} </p>
+        <button class="w-100 h-50 bg-green-700 rounded-2xl disabled:bg-gray-600" (click)="cookieAddition(cookieBooster()![1], count()!)" [disabled]="isenoughCookiesPerSecond()" >Cookies per second upgrade 
+          <p>Level:{{cookieBooster()![1].level}}</p>
+          <p>Cookies per second:{{cookieBooster()![1].multiplier}}</p>
+          <p>More Cokkies per second Price:{{cookieBooster()![1].cost}} </p>
         </button>
         <p>{{count()?.()}}</p>
       
