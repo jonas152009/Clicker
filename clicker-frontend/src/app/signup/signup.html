@@ -5,6 +5,7 @@
       class="border-2 border-black hover:cursor-horizontal-text"
       type="text"
       [formControl]="userNameControl"
+      (keydown.enter)="doSaveEvent()"
     />
 
     @if(userNameControl.hasError('minlength')){
@@ -17,12 +18,7 @@
     <p>Names with space not allowed</p>
     }
 <div class="h-1"></div>
- @if(isunknownUser){
-    <p>User is not Database</p>
-    }
-     @if(!isunknownUser){
-    <p>User is in Database</p>
-    }
+
     <button
       class="w-2xs h-10 bg-green-600 text-white disabled:bg-gray-400 rounded-4xl border-2 border-black"
       (click)="doSaveEvent()"
