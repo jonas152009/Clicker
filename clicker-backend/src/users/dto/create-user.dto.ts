@@ -5,11 +5,6 @@ export class CreateUserDto {
    @IsNotEmpty()
    @IsString()
    name: string;
-   buildings: Building[];
 
-      @IsNotEmpty()
-   @IsNumber()
-   count: number;
-   _id: string;
   
 }

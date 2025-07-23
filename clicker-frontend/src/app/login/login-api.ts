@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { User } from '../signup/user.interface';
 import { Upgradebar } from '../game/upgradebar/upgradebar';
+import { CreateUserdto } from '../signup/createUserdto';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class LoginAPI {
     }
   }
 
-  async createUser(user: User) {
+  async createUser(user: CreateUserdto) {
     try {
       return firstValueFrom(
         this.http.post<User>('http://localhost:3000/users', user)

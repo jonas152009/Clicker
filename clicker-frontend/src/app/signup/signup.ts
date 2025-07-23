@@ -50,9 +50,9 @@ export class Signup {
     } catch (error) {
       console.error(error);
     }
-    const rndId = Math.floor(Math.random()* 9000) +1000
+
     const new_user = await this.login.createUser({
-      name: this.userNameControl.value ?? ' ', count: 0, buildings: [], _id:rndId.toString()
+      name: this.userNameControl.value ?? ' '
     });
   }
   
