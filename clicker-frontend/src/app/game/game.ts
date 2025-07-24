@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Building } from '../Interfaces/building';
 import { LoginAPI } from '../login/login-api';
 import { User } from '../signup/user.interface';
@@ -13,7 +13,14 @@ import { Upgradebar } from './upgradebar/upgradebar';
   templateUrl: './game.html',
 })
 export class Game {
+  productionInterval: any;
+  updateInterval: any;
+  private router = inject(Router);
   constructor(private readonly loginAPI: LoginAPI) {
+    if(sessionStorage.getItem("0") == null)
+    {
+      this.router.navigate(['login']);
+    }
     this.getUserbyId();
   }
   safe_ID = localStorage.getItem('0');
@@ -45,10 +52,10 @@ export class Game {
   };
 
   async getUserbyId() {
-    localStorage.clear();
     console.log(this.safe_ID);
     this.user = await this.loginAPI.getUser(this.safe_ID!);
     if(this.user.playedBefore){
+
     this.cookieBooster = this.user.buildings;
     this.count.update((value) => (value = this.user.count));
     console.log(this.user);
@@ -62,6 +69,7 @@ export class Game {
 
   count = signal(this.user.count);
   async UpdateUser() {
+    console.log(this.user.name)
     console.log(this.user);
     this.user.count = this.count();
     console.log(this.cookieBooster);
@@ -69,11 +77,16 @@ export class Game {
     await this.loginAPI.UpdateUser(this.safe_ID!, this.user);
   }
   ngOnInit() {
-    setInterval(() => {
+    this.productionInterval =  setInterval(() => {
       CookieButton.cookieProduction(this.count, this.cookieBooster);
     }, 1000);
-    setInterval(() => {
+    this.updateInterval = setInterval(() => {
       this.UpdateUser();
     }, 5000);
+  }
+  ngOnDestroy(){
+    sessionStorage.clear();
+    clearInterval(this.productionInterval);
+    clearInterval(this.updateInterval);
   }
 }

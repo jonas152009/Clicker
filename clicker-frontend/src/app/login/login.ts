@@ -27,7 +27,7 @@ export class Login {
         
           this.safe_ID = user._id;
           console.log(this.safe_ID)
-          localStorage.setItem("0",this.safe_ID)
+          sessionStorage.setItem("0",this.safe_ID)
           this.router.navigate(['game']);
         }
       }
