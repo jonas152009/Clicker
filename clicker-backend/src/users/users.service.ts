@@ -4,14 +4,11 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
-
 export class UsersService {
-  
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto) {
     try {
-      
       const createdUser = new this.userModel(createUserDto);
       await createdUser.save();
       return createUserDto;
@@ -30,8 +27,7 @@ export class UsersService {
 
   async findOne(id: string) {
     try {
-      
-      console.log(id)
+      console.log(id);
       const result = await this.userModel.findById(id).exec();
       return result;
     } catch (error) {

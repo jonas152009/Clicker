@@ -23,7 +23,7 @@ export class Game {
     }
     this.getUserbyId();
   }
-  safe_ID = localStorage.getItem('0');
+  safe_ID = sessionStorage.getItem('0');
 
   cookieBooster: Building[] = [
     {
