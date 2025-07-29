@@ -7,7 +7,7 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async createUser(createUserDto: CreateUserDto) {
     try {
       const createdUser = new this.userModel(createUserDto);
       await createdUser.save();
@@ -17,26 +17,30 @@ export class UsersService {
     }
   }
 
-  findAll() {
+  async signupUser(username: string) {
     try {
-      return this.userModel.find();
+      const users = await this.userModel.find();
+      for (var user of users) {
+        if (user.name == username) {
+          return;
+        }
+        return this.createUser({ name: username, playedBefore: false });
+      }
     } catch (error) {
       console.error('failed to find all', error);
     }
   }
 
-  async findOne(id: string) {
-    try {
-      console.log(id);
-      const result = await this.userModel.findById(id).exec();
-      return result;
-    } catch (error) {
-      console.error('found nobody', error);
-    }
+  async findAllUser() {
+    const users = await this.userModel.find().exec();
+    return users;
   }
+
+  
 
   async update(id: string, updateUserDto: UpdateUserDto) {
     try {
+      console.log("update user")
       const updatetuser = await this.userModel.findByIdAndUpdate(
         id,
         updateUserDto,
@@ -54,5 +58,16 @@ export class UsersService {
     } catch (error) {
       console.log('Deleting failed', error);
     }
+  }
+  async getUser(username: string) {
+    const users = await this.findAllUser();
+    for (var user of users) {
+      if (user.name == username) {
+        return user;
+      }
+
+      
+    }
+    return ' Error no User';
   }
 }

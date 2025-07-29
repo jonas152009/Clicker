@@ -17,11 +17,10 @@ export class Game {
   updateInterval: any;
   private router = inject(Router);
   constructor(private readonly loginAPI: LoginAPI) {
-    if(sessionStorage.getItem("0") == null)
-    {
+    if (sessionStorage == null) {
       this.router.navigate(['login']);
     }
-    this.getUserbyId();
+    this.loadSaveGame();
   }
   safe_ID = sessionStorage.getItem('0');
 
@@ -50,42 +49,47 @@ export class Game {
   buildings: this.cookieBooster,
   playedBefore: false
   };
+   async getUserbyName() {
+   const user  =  await this.loginAPI.getUser(sessionStorage.getItem("name")!)
+   return user;
+  }
 
-  async getUserbyId() {
-    console.log(this.safe_ID);
-    this.user = await this.loginAPI.getUser(this.safe_ID!);
-    if(this.user.playedBefore){
-
-    this.cookieBooster = this.user.buildings;
-    this.count.update((value) => (value = this.user.count));
-    console.log(this.user);
-    }else{
+  async loadSaveGame(){
+    this.user = await  this.getUserbyName()
+     if (this.user.playedBefore) {
+      this.cookieBooster = this.user.buildings;
+      this.count.update((value) => (value = this.user.count));
+      console.log(this.user);
+    } else {
+      console.log(this.user._id)
       this.user.buildings = this.cookieBooster;
       this.user.count = this.count();
       this.user.playedBefore = true;
     }
+    console.log(this.user)
   }
+
 
 
   count = signal(this.user.count);
-  async UpdateUser() {
-    console.log(this.user.name)
-    console.log(this.user);
+
+  async Update() {
     this.user.count = this.count();
-    console.log(this.cookieBooster);
+    console.log(this.user);
     this.user.buildings = this.cookieBooster;
-    await this.loginAPI.UpdateUser(this.safe_ID!, this.user);
+    await this.loginAPI.UpdateUser(this.user._id,this.user);
   }
+
   ngOnInit() {
-    this.productionInterval =  setInterval(() => {
+    this.productionInterval = setInterval(() => {
       CookieButton.cookieProduction(this.count, this.cookieBooster);
     }, 1000);
     this.updateInterval = setInterval(() => {
-      this.UpdateUser();
+      this.Update();
     }, 5000);
   }
-  ngOnDestroy(){
-    sessionStorage.clear();
+
+  ngOnDestroy() {
     clearInterval(this.productionInterval);
     clearInterval(this.updateInterval);
   }

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { LoginAPI } from './login-api';
+import { stringify } from 'postcss';
 
 @Component({
   selector: 'app-login, login-reactive-favorite-color',
@@ -9,7 +10,6 @@ import { LoginAPI } from './login-api';
   templateUrl: './login.html',
 })
 export class Login {
-  safe_ID = "";
   username = '';
   isunknownUser = false;
   constructor(private readonly login: LoginAPI) {}
@@ -19,21 +19,18 @@ export class Login {
   private router = inject(Router);
   async doConfirmEvent() {
     this.username = this.userNameControl.value ?? '';
-    const users = await this.login.getUsers();
-    try {
-      for (const user of users) {
-        if (user.name == this.username) 
-          {
-        
-          this.safe_ID = user._id;
-          console.log(this.safe_ID)
-          sessionStorage.setItem("0",this.safe_ID)
-          this.router.navigate(['game']);
-        }
-      }
-      this.isunknownUser = true;
-    } catch (error) {
-      console.error(error);
-    }
+    console.log(this.username)
+   const access_token =  await this.login.loginUser(this.username);
+   if(access_token.headpayload == null){
+    console.error("User does not exist")
+    return ;
+   }
+   
+   document.cookie = "hp"+"="+access_token.headpayload +"; path=/auth";
+   document.cookie= "s"+ "="+access_token.signature +"; path=/auth";
+   sessionStorage.setItem("name",this.username)
+   this.login.getCookies();
+   this.router.navigate(['game']);
+   
   }
 }

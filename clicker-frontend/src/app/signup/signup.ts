@@ -38,22 +38,18 @@ export class Signup {
 
   async doSaveEvent() {
       this.username = this.userNameControl.value ?? '';
-    const users = await this.login.getUsers();
+    const users = await this.login.getUser(this.username);
     try {
-      for (const user of users) {
-        if (user.name == this.username) {
-           this.isunknownUser = false; 
-           return;
-        }
-      }
-      this.isunknownUser = true;
+   
+      this.username = this.userNameControl.value ?? '';
+    console.log(this.username)
+     await this.login.loginUser(this.username);
     } catch (error) {
-      console.error(error);
+      console.log("User Creation error")
     }
 
-    const new_user = await this.login.createUser({
-      name: this.userNameControl.value ?? ' ', playedBefore: false
-    });
+    
+    
     this.router.navigate(['login']);
   }
   

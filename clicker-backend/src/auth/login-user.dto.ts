@@ -1,14 +1,10 @@
 import { IsBoolean, IsDefined, IsEmail, IsNotEmpty, IsNotIn, IsNumber, IsString } from "class-validator";
 
 
-export class CreateUserDto {
+export class LoginUserDto {
    @IsNotEmpty()
    @IsString()
    name: string;
-
-   @IsNotEmpty()
-   @IsBoolean()
-   playedBefore: boolean;
 
   
 }
