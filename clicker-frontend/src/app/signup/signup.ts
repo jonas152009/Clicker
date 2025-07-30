@@ -38,12 +38,11 @@ export class Signup {
 
   async doSaveEvent() {
       this.username = this.userNameControl.value ?? '';
-    const users = await this.login.getUser(this.username);
     try {
    
       this.username = this.userNameControl.value ?? '';
     console.log(this.username)
-     await this.login.loginUser(this.username);
+     await this.login.createUser(this.username);
     } catch (error) {
       console.log("User Creation error")
     }

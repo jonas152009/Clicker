@@ -11,7 +11,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-
+import{Request} from 'express'
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -26,20 +26,26 @@ getUser(@Param('name') name: string){
   return this.usersService.getUser(name)
 }
   
-  @Post('signup/:name')
-  findOne(@Param('name') username: string) {
-    return this.usersService.signupUser(username);
+  @Post('signup')
+  signupUser(@Body() user:{username: string}) {
+    console.log(user.username)
+    return this.usersService.signupUser(user.username);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto,@Req() request: Request ) 
+  {
+    
+    if(this.usersService.proofJWT(request))
+    {
+     this.usersService.update(id, updateUserDto);
+     return true;
+    }
+    return false;
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
-
-
 }

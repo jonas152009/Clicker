@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Req } from '@nestjs/common';
 import { AppService } from './app.service';
-import{Response} from 'express'
+import{Request} from 'express'
+
 
 @Controller()
 export class AppController {
@@ -10,10 +11,10 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-  @Get("cookies")
-   findAll(@Req() request: Request, response: Response) {
-  console.log(response.cookie("0",request)); // or "request.cookies['cookieKey']"
-  // or console.log(request.signedCookies);
-}
+  @Get('cookies')
+  json(@Req() req: Request){
+    console.log(req.cookies)
+    return req.cookies
+  }
 }
 

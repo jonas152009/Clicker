@@ -1,11 +1,15 @@
+import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
+import { Request } from 'express';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    private jwtService: JwtService,
+  ) {}
 
   async createUser(createUserDto: CreateUserDto) {
     try {
@@ -19,12 +23,13 @@ export class UsersService {
 
   async signupUser(username: string) {
     try {
-      const users = await this.userModel.find();
+      console.log(username);
+      const users = await this.findAllUser();
       for (var user of users) {
         if (user.name == username) {
           return;
         }
-        return this.createUser({ name: username, playedBefore: false });
+        return await this.createUser({ name: username, playedBefore: false });
       }
     } catch (error) {
       console.error('failed to find all', error);
@@ -36,11 +41,9 @@ export class UsersService {
     return users;
   }
 
-  
-
   async update(id: string, updateUserDto: UpdateUserDto) {
     try {
-      console.log("update user")
+      console.log('update user');
       const updatetuser = await this.userModel.findByIdAndUpdate(
         id,
         updateUserDto,
@@ -65,9 +68,23 @@ export class UsersService {
       if (user.name == username) {
         return user;
       }
-
-      
     }
     return ' Error no User';
   }
+  proofJWT(request: Request) {
+    console.log('hp:', request.cookies['hp']);
+console.log('s:', request.cookies['s']);
+    const fullToken = request.cookies['hp'] + "."+ request.cookies['s'];
+    console.log(fullToken);
+    console.log("decoded",this.jwtService.decode(fullToken));
+
+    try {
+      this.jwtService.verify(fullToken);
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+    return true;
+  }
+  
 }

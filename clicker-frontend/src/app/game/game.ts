@@ -6,7 +6,7 @@ import { LoginAPI } from '../login/login-api';
 import { User } from '../signup/user.interface';
 import { CookieButton } from './cookie-button/cookie-button';
 import { Upgradebar } from './upgradebar/upgradebar';
-
+import { jwtDecode } from "jwt-decode";
 @Component({
   selector: 'app-root',
   imports: [RouterModule, ReactiveFormsModule, CookieButton, Upgradebar],
@@ -77,7 +77,13 @@ export class Game {
     this.user.count = this.count();
     console.log(this.user);
     this.user.buildings = this.cookieBooster;
-    await this.loginAPI.UpdateUser(this.user._id,this.user);
+     const access_token =  await this.loginAPI.loginUser(sessionStorage.getItem("name")!)
+     document.cookie = "hp"+"="+access_token.headpayload +"; path=/";
+   document.cookie= "s"+ "="+access_token.signature +"; path=/";
+    const verifiedJWT = await this.loginAPI.UpdateUser(this.user._id,this.user);
+    if(verifiedJWT == false){
+       this.router.navigate(['login']);
+    }
   }
 
   ngOnInit() {

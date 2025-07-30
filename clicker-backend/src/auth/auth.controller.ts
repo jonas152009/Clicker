@@ -8,9 +8,11 @@ import {
   Param,
   Patch,
   Post,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './login-user.dto';
+import{Request} from 'express'
 
 @Controller('auth')
 export class AuthController {
@@ -22,5 +24,9 @@ export class AuthController {
     
     return  await this.authService.login(loginUserDto.name);
    
+  }
+  @Get()
+  Cookietest(@Req() req: Request){
+   return  this.authService.proofJWT(req)
   }
 }

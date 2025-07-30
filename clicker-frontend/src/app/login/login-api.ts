@@ -11,10 +11,12 @@ import { User } from '../signup/user.interface';
 export class LoginAPI {
   constructor(private readonly http: HttpClient) {}
 
-  async createUser(user: CreateUserdto) {
+  async createUser(username: string) {
     try {
+     
+      console.log(username)
       return firstValueFrom(
-        this.http.post<User>('http://localhost:3000/users', user)
+        this.http.post<User>('http://localhost:3000/users/signup',{username:username})
       );
     } catch (error) {
       console.error('No backend Conection');
@@ -39,7 +41,7 @@ export class LoginAPI {
     try {
       
       return firstValueFrom(
-        this.http.patch<User>('http://localhost:3000/users/'+ id , user)
+        this.http.patch<boolean>('http://localhost:3000/users/'+ id , user, {withCredentials: true})
       );
     } catch (error) {
       console.error('No backend Conection');
@@ -57,7 +59,8 @@ export class LoginAPI {
       return { name: '' , count: 0, buildings: [], _id:'', playedBefore: false};
     }
   }
-  async getCookies(){
-   return await  this.http.get('http://localhost:3000/cookies', {withCredentials: true})
+  async proofCookies(){
+    console.log("cookies")
+   return  firstValueFrom(this.http.get('http://localhost:3000/auth', {withCredentials: true}));
   }
 }

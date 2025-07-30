@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { LoginAPI } from './login-api';
 import { stringify } from 'postcss';
 
+
 @Component({
   selector: 'app-login, login-reactive-favorite-color',
   imports: [RouterModule, ReactiveFormsModule],
@@ -12,7 +13,8 @@ import { stringify } from 'postcss';
 export class Login {
   username = '';
   isunknownUser = false;
-  constructor(private readonly login: LoginAPI) {}
+  constructor(private readonly login: LoginAPI) {
+  }
 
   userNameControl = new FormControl('');
 
@@ -26,10 +28,10 @@ export class Login {
     return ;
    }
    
-   document.cookie = "hp"+"="+access_token.headpayload +"; path=/auth";
-   document.cookie= "s"+ "="+access_token.signature +"; path=/auth";
+   document.cookie = "hp"+"="+access_token.headpayload +"; path=/";
+   document.cookie= "s"+ "="+access_token.signature +"; path=/";
    sessionStorage.setItem("name",this.username)
-   this.login.getCookies();
+ 
    this.router.navigate(['game']);
    
   }
