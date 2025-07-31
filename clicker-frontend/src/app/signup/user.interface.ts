@@ -5,5 +5,6 @@ export interface User {
   name: string;
   count: number;
   buildings: Building[];
+  shopsBooster: Building[];
   playedBefore: boolean;
 }

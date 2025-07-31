@@ -10,6 +10,8 @@ export class User {
   name: string;
   @Prop()
   buildings: Building[];
+   @Prop()
+  shopsBooster: Building[];
   @Prop()
   count: number;
   @Prop()

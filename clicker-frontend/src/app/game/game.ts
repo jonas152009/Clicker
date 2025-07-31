@@ -49,28 +49,28 @@ export class Game {
       increasinValue: 3,
       increasinMultiplier: 1,
     },
-  ];
-  shops: Building[]= [   {
-      name: 'Shop1',
+          {name: 'Shop1',
       level: 0,
-      multiplier: 12,
-      cost: 50,
+      multiplier: 0,
+      cost: 200,
       increasinValue: 3,
-      increasinMultiplier: 3,
+      increasinMultiplier: 9,
     },
     {
       name: 'Shop2',
       level: 0,
-      multiplier: 10,
+      multiplier: 0,
       cost: 50,
       increasinValue: 2,
-      increasinMultiplier: 1,
-    },]
+      increasinMultiplier: 5,
+    },];
+  shops: Building[]= [ this.cookieBooster[3], this.cookieBooster[4]]
   user: User = {
   _id: "",
   name: "",
   count: 0,
   buildings: this.cookieBooster,
+  shopsBooster: this.shops,
   playedBefore: false
   };
   async getUserbyName() {
@@ -82,11 +82,13 @@ export class Game {
     this.user = await this.getUserbyName();
     if (this.user.playedBefore) {
       this.cookieBooster = this.user.buildings;
+      this.shops = this.user.shopsBooster
       this.count.update((value) => (value = this.user.count));
       console.log(this.user);
     } else {
       console.log(this.user._id);
       this.user.buildings = this.cookieBooster
+      this.user.shopsBooster = this.shops
       this.user.count = this.count();
       this.user.playedBefore = true;
     }
@@ -115,7 +117,7 @@ export class Game {
 
   ngOnInit() {
     this.productionInterval = setInterval(() => {
-      CookieButton.cookieProduction(this.count, this.cookieBooster);
+      CookieButton.cookieProduction(this.count, this.cookieBooster, this.shops);
     }, 1000);
     this.updateInterval = setInterval(() => {
       this.Update();

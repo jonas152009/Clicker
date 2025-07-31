@@ -11,19 +11,28 @@ import { Building } from '../../Interfaces/building';
 export class CookieButton {
   count = input<WritableSignal<number>>();
   cookieBooster = input<Building[]>();
+  shops = input<Building[]>();
+  highscore = 0
 
   static cookieProduction(
     count: WritableSignal<number>,
-    cookieBooster: Building[]
+    cookieBooster: Building[],
+    shops : Building[]
   ) {
+    const shopMultiplier = shops.reduce((a,b) => {
+      return a + b.multiplier;
+    }, 0)
+    
     count.update(
       (value) =>
         value +
         
           cookieBooster.reduce((a, b) => {
             return a + b.multiplier;
-          }, 0)
+          }, 0) + shopMultiplier
     );
+  
+  
   }
 
   doClickAddCookies() {
@@ -37,7 +46,18 @@ export class CookieButton {
             }, 1)
           )
     );
+    this.profCount()
   }
-  
+  profCount(){
+    const cookie = document.getElementById("Cookie")
+    if(this.count()!() > 500000 && this.highscore == 0){
+      this.highscore = 500000
+       cookie?.setAttribute("src","https://piskel-imgstore-b.appspot.com/img/dc8f7394-6e03-11f0-b7ab-dfcd6ab0b5c0.gif")
+    }
+     if(this.count()!() > 1000000 && this.highscore == 500000){
+      this.highscore = 1000000
+       cookie?.setAttribute("src","https://piskel-imgstore-b.appspot.com/img/dc8f7394-6e03-11f0-b7ab-dfcd6ab0b5c0.gif")
+    }
+  }
   
 }

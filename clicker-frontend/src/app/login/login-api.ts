@@ -56,7 +56,7 @@ export class LoginAPI {
       );
     } catch (error) { 
       console.error('No backend Conection');
-      return { name: '' , count: 0, buildings: [], _id:'', playedBefore: false};
+      return { name: '' , count: 0, buildings: [], _id:'', playedBefore: false, shopsBooster: []};
     }
   }
   async proofCookies(){

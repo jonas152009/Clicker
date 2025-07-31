@@ -7,6 +7,7 @@ import { Building } from '../../Interfaces/building';
   templateUrl: './upgradebar.html',
 })
 export class Upgradebar {
+
   count = input<WritableSignal<number>>();
    cookieBooster = input<Building[]>();
    shops = input<Building[]>();
@@ -22,10 +23,20 @@ export class Upgradebar {
     count.update((value) => value - cookieBoosterBuilding.cost);
     cookieBoosterBuilding.cost =
       cookieBoosterBuilding.cost * cookieBoosterBuilding.increasinValue;
-    return (cookieBoosterBuilding.multiplier =
+      cookieBoosterBuilding.multiplier =
       cookieBoosterBuilding.multiplier +
-      cookieBoosterBuilding.increasinMultiplier); 
+      cookieBoosterBuilding.increasinMultiplier; 
   }
+  shopBoost(shop: Building,count: WritableSignal<number>) {
+    shop.level++;
+    count.update((value) => value - shop.cost);
+    shop.cost = shop.cost * shop.increasinValue;
+    shop.multiplier = shop.increasinMultiplier 
+    setTimeout(() => {
+      shop.multiplier = 0
+    },10000)
+
+}
 
      isenoughCookiesShop2 = computed(
     () => this.count()!() < this.shops()![1].cost
