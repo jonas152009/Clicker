@@ -1,9 +1,35 @@
-<body class="h-screen w-screen relative">
-  <div class="flex items-center flex-col justify-center h-full w-full">
-    <h1>Login</h1>
+<body class="h-screen w-screen relative ">
+  
+  @if(counter() < 150){
+  <div
+    class="flex items-center flex-col justify-center h-full w-full border-black border-4"
+  >
+  
+    <button
+      class="p-0 border-none bg-transparent opacity-80   animate-bounce"
+      id="CookieButton"
+      
+      (click)="clickedCookie()"
+    >
+      <img
+       id="Cookie"
+        class="w-80 active:scale-115 rounded-4xl m-0 animate-spin [animation-duration:3s] [animation-timing-function:linear]"
+        draggable="false"
+        src="https://piskel-imgstore-b.appspot.com/img/33e66335-6d3d-11f0-85b6-b5db701079ac.gif"
+        alt="Cookie"
+      />
+    </button>
 
+    @if(counter() > 0){
+      <h1 class="font-bold">Login</h1>
+      <div>
+      <h3 class="translate-x-[-6.5rem]">Username <span class="text-red-500 ">*</span>
+      </h3>
+      </div>
     <input
-      class="bg-white border-black border-2 hover:cursor-horizontal-text"
+    (change)="isunknownUser = false"
+      class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-10"
+      id="userInput"
       type="text"
       [formControl]="userNameControl"
       (keydown.enter)="doConfirmEvent()"
@@ -11,16 +37,21 @@
     />
     <div class="h-1"></div>
     @if(isunknownUser){
-    <p>User not in Database</p>
+    <p 
+    style="animation-iteration-count:1" class="text-red-600 animate-ping ">Wrong Username </p>
     }
     <button
-      class="w-2xs h-10 border-black border-2 rounded-4xl bg-blue-600 text-white disabled:bg-gray-400"
+      class="w-2xs h-10 border-black border-2 rounded-4xl bg-blue-600 text-white disabled:bg-gray-400 "
       (click)="doConfirmEvent()"
       [disabled]="userNameControl.invalid"
     >
       Confirm
     </button>
 
-    <a [routerLink]="['/signup']" class="text-blue-600">Link to Sign up</a>
+    <a [routerLink]="['/signup']" class="text-blue-600 underline">Link to Sign up</a>
+    }
   </div>
+  }@else {
+ 
+  }
 </body>

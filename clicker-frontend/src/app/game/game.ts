@@ -43,7 +43,7 @@ export class Game {
     },
     {
       name: 'Facrory3',
-      level: 100,
+      level: 0,
       multiplier: 0,
       cost: 10,
       increasinValue: 3,

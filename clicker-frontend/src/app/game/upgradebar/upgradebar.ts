@@ -9,6 +9,7 @@ import { Building } from '../../Interfaces/building';
 export class Upgradebar {
   count = input<WritableSignal<number>>();
    cookieBooster = input<Building[]>();
+   shops = input<Building[]>();
   
    ngOnInit(){
     console.log(this.cookieBooster())
@@ -26,6 +27,12 @@ export class Upgradebar {
       cookieBoosterBuilding.increasinMultiplier); 
   }
 
+     isenoughCookiesShop2 = computed(
+    () => this.count()!() < this.shops()![1].cost
+  );
+     isenoughCookiesShop1 = computed(
+    () => this.count()!() < this.shops()![0].cost
+  );
     isenoughCookiesFactorie3 = computed(
     () => this.count()!() < this.cookieBooster()![2].cost
   );

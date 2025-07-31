@@ -4,19 +4,18 @@
     <input
       class="border-2 border-black hover:cursor-horizontal-text"
       type="text"
-      [formControl]="userNameControl"
-      (keydown.enter)="doSaveEvent()"
+      [formControl]="userNameControl"srg
       autofocus
     />
 
     @if(userNameControl.hasError('minlength')){
 
-    <p>Too short minumum 3 characters</p>
+    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Too short minumum 3 characters</p>
     } @if(userNameControl.hasError('maxlength')){
 
-    <p>Too long maximum 10 characters</p>
+    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Too long maximum 10 characters</p>
     } @if(userNameControl.hasError('NoSpace')){
-    <p>Names with space not allowed</p>
+    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Names with space not allowed</p>
     }
 <div class="h-1"></div>
 
@@ -30,4 +29,5 @@
     </button>
     <a [routerLink]="['/login'] " class="text-blue-600">Link to Login</a>
   </div>
+  <canvas></canvas>
 </body>
