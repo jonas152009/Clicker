@@ -18,9 +18,16 @@ export class UsersController {
 
  
 @Get()
-findAllUser(){
-  return this.usersService.findAllUser();
-}
+findAllUser(request: Request){
+  if(this.usersService.proofJWT(request))
+    {
+      return this.usersService.findAllUser();
+     
+    }else{ return "Error 401 unauthorized"}
+   
+  }
+  
+
 @Get(':name')
 getUser(@Param('name') name: string){
   return this.usersService.getUser(name)

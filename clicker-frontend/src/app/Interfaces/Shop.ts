@@ -1,4 +1,4 @@
-export interface Building {
+export interface Shop {
   name: string;
   level: number;
   multiplier: number;

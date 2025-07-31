@@ -23,9 +23,12 @@ export class Upgradebar {
       cookieBoosterBuilding.cost * cookieBoosterBuilding.increasinValue;
     return (cookieBoosterBuilding.multiplier =
       cookieBoosterBuilding.multiplier +
-      cookieBoosterBuilding.increasinMultiplier);
+      cookieBoosterBuilding.increasinMultiplier); 
   }
 
+    isenoughCookiesFactorie3 = computed(
+    () => this.count()!() < this.cookieBooster()![2].cost
+  );
   isenoughCookiesPerSecond = computed(
     () => this.count()!() < this.cookieBooster()![1].cost
   );

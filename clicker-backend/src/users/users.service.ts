@@ -72,19 +72,19 @@ export class UsersService {
     return ' Error no User';
   }
   proofJWT(request: Request) {
-    console.log('hp:', request.cookies['hp']);
-console.log('s:', request.cookies['s']);
-    const fullToken = request.cookies['hp'] + "."+ request.cookies['s'];
-    console.log(fullToken);
-    console.log("decoded",this.jwtService.decode(fullToken));
-
     try {
+      console.log('hp:', request.cookies['hp']);
+      console.log('s:', request.cookies['s']);
+      const fullToken = request.cookies['hp'] + '.' + request.cookies['s'];
+      console.log(fullToken);
+      console.log('decoded', this.jwtService.decode(fullToken));
       this.jwtService.verify(fullToken);
+      return true;
     } catch (error) {
-      console.error(error);
+      console.log(error)
       return false;
     }
-    return true;
+
+   
   }
-  
 }
