@@ -21,26 +21,46 @@ export class UsersService {
     }
   }
 
-  async signupUser(username: string) {
+  async signupUser(username: string, password: string) {
     try {
       console.log(username);
+      /*
       const users = await this.findAllUser();
       for (var user of users) {
         if (user.name == username) {
           return false;
         }
-       await this.createUser({ name: username, playedBefore: false });
       }
-      return true;
+      */
+
+      const userExists = await this.checkIfUserExists(username);
+      if (!userExists) {
+        await this.createUser({
+          name: username,
+          password: password,
+          playedBefore: false,
+          
+        });
+        return true;
+      }
+      return false
+      
     } catch (error) {
       console.error('failed to find all', error);
     }
-    
   }
 
   async findAllUser() {
     const users = await this.userModel.find().exec();
     return users;
+  }
+
+  async checkIfUserExists(username: string) {
+    const user = await this.userModel.findOne({
+      name: username,
+    });
+
+    return user ? true : false;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
@@ -83,10 +103,8 @@ export class UsersService {
       this.jwtService.verify(fullToken);
       return true;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return false;
     }
-
-   
   }
 }

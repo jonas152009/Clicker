@@ -34,9 +34,9 @@ getUser(@Param('name') name: string){
 }
   
   @Post('signup')
-  signupUser(@Body() user:{username: string}) {
+  signupUser(@Body() user:{username: string, password: string}) {
     console.log(user.username)
-    return this.usersService.signupUser(user.username);
+    return this.usersService.signupUser(user.username, user.password);
   }
 
   @Patch(':id')

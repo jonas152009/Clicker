@@ -8,11 +8,12 @@ export class AuthService {
     private jwtService: JwtService,
     private userService: UsersService,
   ) {}
-  async login(username: string) {
+  async login(username: string, password: string) {
     try {
+      
       const users = await this.userService.findAllUser();
       for (var user of users) {
-        if (user.name == username) {
+        if (user.name == username && user.password == password)  {
           return this.createJwt(user);
         }
       }
