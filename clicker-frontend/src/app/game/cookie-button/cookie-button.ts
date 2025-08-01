@@ -50,13 +50,13 @@ export class CookieButton {
   }
   profCount(){
     const cookie = document.getElementById("Cookie")
-    if(this.count()!() > 500000 && this.highscore == 0){
-      this.highscore = 500000
+    if(this.count()!() > 2000 || this.highscore == 2000){
+      this.highscore = 2000
        cookie?.setAttribute("src","https://piskel-imgstore-b.appspot.com/img/dc8f7394-6e03-11f0-b7ab-dfcd6ab0b5c0.gif")
     }
-     if(this.count()!() > 1000000 && this.highscore == 500000){
-      this.highscore = 1000000
-       cookie?.setAttribute("src","https://piskel-imgstore-b.appspot.com/img/dc8f7394-6e03-11f0-b7ab-dfcd6ab0b5c0.gif")
+     if(this.count()!() > 4000 || this.highscore == 4000){
+      this.highscore = 4000
+      cookie?.setAttribute("src", "https://piskel-imgstore-b.appspot.com/img/fd09ce94-6e03-11f0-bfae-dfcd6ab0b5c0.gif")
     }
   }
   
