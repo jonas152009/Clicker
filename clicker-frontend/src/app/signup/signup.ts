@@ -54,7 +54,7 @@ export class Signup {
 
     
     
-   // this.router.navigate(['login']);
+    this.router.navigate(['login']);
   }
   
  
