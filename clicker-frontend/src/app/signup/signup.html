@@ -1,13 +1,18 @@
 <body class="h-screen w-screen relative">
   <div class="flex items-center flex-col justify-center h-full w-full">
-    <h1>Sign up</h1>
+     <h1 class="font-bold">Sign up</h1>
+      <div>
+      <h3 class="translate-x-[-6.5rem]">Username <span class="text-red-500 ">*</span>
+      </h3>
+      </div>
     <input
-      class="border-2 border-black hover:cursor-horizontal-text"
+      class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-5 h-9"
+      id="userInput"
       type="text"
-      [formControl]="userNameControl"srg
+      [formControl]="userNameControl"
+     
       autofocus
     />
-
     @if(userNameControl.hasError('minlength')){
 
     <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Too short minumum 3 characters</p>
@@ -17,17 +22,20 @@
     } @if(userNameControl.hasError('NoSpace')){
     <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Names with space not allowed</p>
     }
+     @if(isunknownUser){
+    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Name already exists</p>
+    }
 <div class="h-1"></div>
 
     <button
-      class="w-2xs h-10 bg-green-600 text-white disabled:bg-gray-400 rounded-4xl border-2 border-black"
+      class="w-60 h-10 bg-green-600 text-white disabled:bg-gray-400 rounded-4xl border-2 border-black mb-2"
       (click)="doSaveEvent()"
       [disabled]="userNameControl.invalid"
       type="submit"
     >
       Save
     </button>
-    <a [routerLink]="['/login'] " class="text-blue-600">Link to Login</a>
+    <a [routerLink]="['/login'] " class="text-blue-600 underline">Link to Login</a>
   </div>
   <canvas></canvas>
 </body>

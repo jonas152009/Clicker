@@ -42,7 +42,11 @@ export class Signup {
    
       this.username = this.userNameControl.value ?? '';
     console.log(this.username)
-     await this.login.createUser(this.username);
+   const createdUser  = await this.login.createUser(this.username);
+   if(createdUser == null)
+   {
+      this.isunknownUser = true
+   }
     } catch (error) {
       console.log("User Creation error")
     }

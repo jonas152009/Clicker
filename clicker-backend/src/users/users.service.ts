@@ -27,7 +27,7 @@ export class UsersService {
       const users = await this.findAllUser();
       for (var user of users) {
         if (user.name == username) {
-          return;
+          return null;
         }
         return await this.createUser({ name: username, playedBefore: false });
       }
