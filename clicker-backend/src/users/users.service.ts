@@ -27,13 +27,15 @@ export class UsersService {
       const users = await this.findAllUser();
       for (var user of users) {
         if (user.name == username) {
-          return null;
+          return false;
         }
-        return await this.createUser({ name: username, playedBefore: false });
+       await this.createUser({ name: username, playedBefore: false });
       }
+      return true;
     } catch (error) {
       console.error('failed to find all', error);
     }
+    
   }
 
   async findAllUser() {

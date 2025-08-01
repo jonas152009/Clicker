@@ -43,9 +43,10 @@ export class Signup {
       this.username = this.userNameControl.value ?? '';
     console.log(this.username)
    const createdUser  = await this.login.createUser(this.username);
-   if(createdUser == null)
+   if(createdUser == false)
    {
       this.isunknownUser = true
+      return;
    }
     } catch (error) {
       console.log("User Creation error")
@@ -53,7 +54,7 @@ export class Signup {
 
     
     
-    this.router.navigate(['login']);
+   // this.router.navigate(['login']);
   }
   
  

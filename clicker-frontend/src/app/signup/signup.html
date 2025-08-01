@@ -15,15 +15,15 @@
     />
     @if(userNameControl.hasError('minlength')){
 
-    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Too short minumum 3 characters</p>
+    <p style="animation-iteration-count:1" class="text-red-600  ">Too short minumum 3 characters</p>
     } @if(userNameControl.hasError('maxlength')){
 
-    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Too long maximum 10 characters</p>
+    <p style="animation-iteration-count:1" class="text-red-600  ">Too long maximum 10 characters</p>
     } @if(userNameControl.hasError('NoSpace')){
-    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Names with space not allowed</p>
+    <p style="animation-iteration-count:1" class="text-red-600  ">Names with space not allowed</p>
     }
      @if(isunknownUser){
-    <p style="animation-iteration-count:1" class="text-red-600 animate-ping ">Name already exists</p>
+    <p style="animation-iteration-count:1" class="text-red-600  ">Name already exists</p>
     }
 <div class="h-1"></div>
 

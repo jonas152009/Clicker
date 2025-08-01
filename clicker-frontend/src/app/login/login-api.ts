@@ -16,7 +16,7 @@ export class LoginAPI {
      
       console.log(username)
       return firstValueFrom(
-        this.http.post<User>('http://localhost:3000/users/signup',{username:username})
+        this.http.post<boolean>('http://localhost:3000/users/signup',{username:username})
       );
     } catch (error) {
       console.error('No backend Conection');
