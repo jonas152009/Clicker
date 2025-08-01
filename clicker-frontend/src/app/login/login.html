@@ -28,7 +28,7 @@
       </div>
     <input
     (change)="isunknownUser = false"
-      class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-10"
+      class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-5 h-9"
       id="userInput"
       type="text"
       [formControl]="userNameControl"
@@ -41,7 +41,7 @@
     style="animation-iteration-count:1" class="text-red-600 animate-ping ">Wrong Username </p>
     }
     <button
-      class="w-2xs h-10 border-black border-2 rounded-4xl bg-blue-600 text-white disabled:bg-gray-400 "
+      class="w-60 h-10 border-black border-2 rounded-4xl bg-blue-600 text-white disabled:bg-gray-400 mb-2"
       (click)="doConfirmEvent()"
       [disabled]="userNameControl.invalid"
     >

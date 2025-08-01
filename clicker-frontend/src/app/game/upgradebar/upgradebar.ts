@@ -38,7 +38,7 @@ export class Upgradebar {
     setTimeout(() => {
      shop.multiplier = 0
     
-    },3000)
+    },10000)
 
 }
 
