@@ -1,18 +1,15 @@
-<body class="h-screen w-screen relative ">
-  
+<body class="h-screen w-screen relative">
   @if(counter() < 150){
   <div
     class="flex items-center flex-col justify-center h-full w-full border-black border-4"
   >
-  
     <button
-      class="p-0 border-none bg-transparent opacity-80   animate-bounce"
+      class="p-0 border-none bg-transparent opacity-80 animate-bounce"
       id="CookieButton"
-      
       (click)="clickedCookie()"
     >
       <img
-       id="Cookie"
+        id="Cookie"
         class="w-80 active:scale-115 rounded-4xl m-0 animate-spin [animation-duration:3s] [animation-timing-function:linear]"
         draggable="false"
         src="https://piskel-imgstore-b.appspot.com/img/33e66335-6d3d-11f0-85b6-b5db701079ac.gif"
@@ -21,13 +18,14 @@
     </button>
 
     @if(counter() > 0){
-      <h1 class="font-bold">Login</h1>
-      <div>
-      <h3 class="translate-x-[-6.5rem]">Username <span class="text-red-500 ">*</span>
+    <h1 class="font-bold">Login</h1>
+    <div>
+      <h3 class="translate-x-[-6.5rem]">
+        Username <span class="text-red-500">*</span>
       </h3>
-      </div>
+    </div>
     <input
-    (change)="isunknownUser = false"
+      (change)="isunknownUser = false"
       class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-5 h-9"
       id="userInput"
       type="text"
@@ -35,10 +33,22 @@
       (keydown.enter)="doConfirmEvent()"
       autofocus
     />
-   
+    <h3 class="translate-x-[-6.5rem]">
+      Password <span class="text-red-500">*</span>
+    </h3>
+    <input
+      class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-5 h-9"
+      type="password"
+      [formControl]="userPasswordControl"
+      (keydown.enter)="doConfirmEvent()"
+    />
+
     @if(isunknownUser){
-    <p 
-    style="animation-iteration-count:1" class="text-red-600  ">Wrong Username </p>
+    <p class="text-red-600">Wrong Username or Password</p>
+    } @if(userNameControl.hasError('required') ||
+    userPasswordControl.hasError("required")){
+
+    <p class="text-red-600">Username and Password can't be empty</p>
     }
     <button
       class="w-60 h-10 border-black border-2 rounded-4xl bg-blue-600 text-white disabled:bg-gray-400 mb-2"
@@ -48,10 +58,10 @@
       Confirm
     </button>
 
-    <a [routerLink]="['/signup']" class="text-blue-600 underline">Link to Sign up</a>
+    <a [routerLink]="['/signup']" class="text-blue-600 underline"
+      >Link to Sign up</a
+    >
     }
   </div>
-  }@else {
- 
-  }
+  }@else { }
 </body>

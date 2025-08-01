@@ -1,10 +1,20 @@
 <body class="h-screen w-screen bg-gray-900">
   <div class="grid grid-cols-7 h-screen gap-4 p-6">
-    <div class="col-span-3 flex flex-col items-center justify-center ">
-     <app-cookie-button [count]="count" [cookieBooster]="cookieBooster" [shops]="shops"></app-cookie-button>
-     </div>
-       <div class="col-span-4 subgrid grid-cols-3 gap-4 bg-gray-500 rounded-3xl p-4 shadow-md">
-    <app-upgradebar [count]="count" [cookieBooster]="cookieBooster" [shops]="shops"></app-upgradebar>
+    <div class="col-span-3 flex flex-col items-center justify-center">
+      <app-cookie-button
+        [count]="count"
+        [cookieBooster]="cookieBooster"
+        [shops]="shops"
+      ></app-cookie-button>
+    </div>
+    <div
+      class="col-span-4 subgrid grid-cols-3 gap-4 bg-gray-500 rounded-3xl p-4 shadow-md"
+    >
+      <app-upgradebar
+        [count]="count"
+        [cookieBooster]="cookieBooster"
+        [shops]="shops"
+      ></app-upgradebar>
     </div>
   </div>
 </body>

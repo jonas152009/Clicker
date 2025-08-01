@@ -3,14 +3,14 @@
     {{ count()?.() }}
   </p>
   <button
-    class="p-0 border-none bg-transparent  opacity-80 "
+    class="p-0 border-none bg-transparent opacity-80 select-none"
     (click)="doClickAddCookies()"
   >
     <img
       class="w-150 active:scale-110 rounded-4xl m-0 animate-spin [animation-duration:3s] [animation-timing-function:linear]"
       id="Cookie"
       draggable="false"
-      src="https://piskel-imgstore-b.appspot.com/img/33e66335-6d3d-11f0-85b6-b5db701079ac.gif"
+      [src]="getCookieImage()"
       alt="Cookie"
     />
   </button>

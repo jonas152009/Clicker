@@ -8,9 +8,8 @@ describe('Upgradebar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Upgradebar]
-    })
-    .compileComponents();
+      imports: [Upgradebar],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Upgradebar);
     component = fixture.componentInstance;

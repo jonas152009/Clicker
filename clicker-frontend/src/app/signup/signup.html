@@ -7,7 +7,6 @@
       </div>
     <input
       class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-5 h-9"
-      id="userInput"
       type="text"
       [formControl]="userNameControl"
      
@@ -25,12 +24,30 @@
      @if(isunknownUser){
     <p style="animation-iteration-count:1" class="text-red-600  ">Name already exists</p>
     }
+    <h3 class="translate-x-[-6.5rem]">Password <span class="text-red-500 ">*</span></h3>
+      <input
+      class="bg-white border-black border-2 hover:cursor-horizontal-text w-2xs mb-5 h-9"
+      type="password"
+      [formControl]="userPasswordControl"
+     
+    />
+    @if(userPasswordControl.hasError('minlength')){
+
+    <p style="animation-iteration-count:1" class="text-red-600  ">Too short you need 8 characters</p>
+    } @if(userPasswordControl.hasError('maxlength')){
+
+    <p style="animation-iteration-count:1" class="text-red-600  ">Too long you need 8 characters</p>
+    } @if(userPasswordControl.hasError('NoSpace')){
+    <p style="animation-iteration-count:1" class="text-red-600  ">Names with space not allowed</p>
+    }
+    
+
 <div class="h-1"></div>
 
     <button
       class="w-60 h-10 bg-green-600 text-white disabled:bg-gray-400 rounded-4xl border-2 border-black mb-2"
       (click)="doSaveEvent()"
-      [disabled]="userNameControl.invalid"
+      [disabled]="userNameControl.invalid || userPasswordControl.invalid"
       type="submit"
     >
       Save

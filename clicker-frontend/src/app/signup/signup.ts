@@ -25,6 +25,7 @@ import { Upgradebar } from '../game/upgradebar/upgradebar';
 })
 export class Signup {
   username = '';
+  password = '';
   isunknownUser = false;
   constructor(private readonly login: LoginAPI) {}
 
@@ -34,15 +35,20 @@ export class Signup {
     Validators.maxLength(10),
     VallidationNoSpace,
   ]);
+    userPasswordControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+    Validators.maxLength(8),
+    VallidationNoSpace,
+  ]);
   private router = inject(Router);
 
   async doSaveEvent() {
       this.username = this.userNameControl.value ?? '';
+      this.password = this.userPasswordControl.value ?? '';
     try {
-   
-      this.username = this.userNameControl.value ?? '';
     console.log(this.username)
-   const createdUser  = await this.login.createUser(this.username);
+   const createdUser  = await this.login.createUser(this.username, this.password);
    if(createdUser == false)
    {
       this.isunknownUser = true

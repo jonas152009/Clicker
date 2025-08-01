@@ -11,21 +11,21 @@ import { User } from '../signup/user.interface';
 export class LoginAPI {
   constructor(private readonly http: HttpClient) {}
 
-  async createUser(username: string) {
+  async createUser(username: string, password: string) {
     try {
      
       console.log(username)
       return firstValueFrom(
-        this.http.post<boolean>('http://localhost:3000/users/signup',{username:username})
+        this.http.post<boolean>('http://localhost:3000/users/signup',{username:username, password: password})
       );
     } catch (error) {
       console.error('No backend Conection');
       return { name: '' };
     }
   }
-  async loginUser(username: string) {
+  async loginUser(username: string, password: string) {
     return firstValueFrom(
-      this.http.post<{headpayload: string,signature: string}>('http://localhost:3000/auth/login', {name: username}));
+      this.http.post<{headpayload: string,signature: string}>('http://localhost:3000/auth/login', {name: username, password: password}));
   }
   async deleteUser(id: string) {
     try {

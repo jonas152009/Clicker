@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { LoginAPI } from './login-api';
 import { stringify } from 'postcss';
-
+import { VallidationNoSpace } from '../signup/signup';
+import party from "party-js";
 
 @Component({
   selector: 'app-login, login-reactive-favorite-color',
@@ -14,6 +15,7 @@ export class Login {
 
   counter = signal(0);
   username = '';
+  password = '';
   isunknownUser = false;
   constructor(private readonly login: LoginAPI) {
   }
@@ -22,6 +24,7 @@ export class Login {
     const input = document.getElementById("userInput")
     const cookie = document.getElementById("Cookie")
   const  cookieButton = document.getElementById("CookieButton")
+
   this.counter.update((value) => value+1)
   switch(this.counter())
   {
@@ -48,13 +51,19 @@ this.isunknownUser = true
   }
 }
 
-  userNameControl = new FormControl('');
+    userNameControl = new FormControl('', [
+    Validators.required,
+  ]);
+    userPasswordControl = new FormControl('', [
+    Validators.required,
+  ]);
 
   private router = inject(Router);
   async doConfirmEvent() {
     this.username = this.userNameControl.value ?? '';
+    this.password = this.userPasswordControl.value ?? '';
     console.log(this.username)
-   const access_token =  await this.login.loginUser(this.username);
+   const access_token =  await this.login.loginUser(this.username, this.password);
    if(access_token.headpayload == null){
     console.error("User does not exist")
     this.isunknownUser = true
@@ -64,8 +73,10 @@ this.isunknownUser = true
    document.cookie = "hp"+"="+access_token.headpayload +"; path=/";
    document.cookie= "s"+ "="+access_token.signature +"; path=/";
    sessionStorage.setItem("name",this.username)
+   sessionStorage.setItem("password", this.password)
  
    this.router.navigate(['game']);
    
   }
+  
 }
